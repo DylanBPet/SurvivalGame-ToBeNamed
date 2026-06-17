@@ -6,7 +6,7 @@ public class SpawningEnemyScript : MonoBehaviour
     public GameObject enemyPrefab;
 
     public Vector2 playerPos;
-    private Vector2 EnemySpawnPos;
+    private Vector2 enemySpawnPos;
 
     public List<GameObject> spawnedEnemies;
 
@@ -17,6 +17,13 @@ public class SpawningEnemyScript : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        spawnedEnemies.Add(Instantiate(enemyPrefab, playerPos, Quaternion.identity));
+        GetRandomSpawn();
+        spawnedEnemies.Add(Instantiate(enemyPrefab, enemySpawnPos, Quaternion.identity));
+        
+    }
+
+    private void GetRandomSpawn()
+    {
+        enemySpawnPos = playerPos + (Random.insideUnitCircle.normalized * Random.Range(15, 30));
     }
 }
