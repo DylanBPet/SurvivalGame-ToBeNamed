@@ -22,7 +22,7 @@ public class ShootingBulletScript : MonoBehaviour
 
         if (isShooting && Time.time >= nextTimeToFire)
         {
-            fireRate = Time.time + 1f / fireRate;
+            nextTimeToFire = Time.time + 1f / fireRate;
             shoot();
         }
 
