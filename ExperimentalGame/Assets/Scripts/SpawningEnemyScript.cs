@@ -10,8 +10,36 @@ public class SpawningEnemyScript : MonoBehaviour
 
     public List<GameObject> spawnedEnemies;
 
+    //the math to spawn more enemies the longer the game goes
+    public float initialSpawnDelay = 2f; //how long it takes initially in seconds to spawn an enemy
+    public float minSpawnDelay = 0.2f; //how long it will take to spawn enemy when max difficulty is reached
+    public float timeToMaxDifficulty = 120f; //how long it takes to reach max difficulty
+
+    private float spawnTimer = 0f; //the time between spawning enemy
+
     void Update()
     {
+        //time counts up since the game started up to the max difficulty
+        //Clamp01 keeps the number between 0 and 1.0 so at max difficulty it will be a max of 1 (or 100 percent)
+        float difficultyPercent = Mathf.Clamp01(Time.time / timeToMaxDifficulty);
+
+        //a math function that creates a value percentage between two numbers
+        // in this case it would be lerping between the initial spawn, the min spawn. with the difficultyPercent being the PERCENTAGE of how far it is
+        float currentSpawnDelay = Mathf.Lerp(initialSpawnDelay, minSpawnDelay, difficultyPercent);
+
+        //spawn timer counting up
+        spawnTimer += Time.deltaTime;
+
+        //if the spawn timer counts to or above the current spawn delay (changes based on difficulty percentage)
+        if (spawnTimer > currentSpawnDelay)
+        {
+            //spawn enemy
+            SpawnEnemy();
+            SpawnEnemy();
+            //reset timer
+            spawnTimer = 0;
+        }
+
         playerPos = transform.position;
 
         for (int i = 0; i < spawnedEnemies.Count; i++)
