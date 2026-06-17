@@ -252,6 +252,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 314136070}
   m_CullTransparentMesh: 1
+--- !u!1 &496090887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496090888}
+  - component: {fileID: 496090889}
+  m_Layer: 0
+  m_Name: Interaction Script Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496090888
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496090887}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.25468, y: -1.87307, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &496090889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496090887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc79a08fed935f44a436458e74b99f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletandEnemyCheckScript
+  bulletScript: {fileID: 1846382612}
+  spawningEnemyScript: {fileID: 1846382611}
 --- !u!1 &608001129
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,7 +1056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e26857658038649be8e69db10b37d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMoveScript
-  speed: 3
+  speed: 6
   movement: {x: 0, y: 0}
 --- !u!212 &1846382609
 SpriteRenderer:
@@ -1114,6 +1160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShootingBulletScript
   bulletPrefab: {fileID: 7696673607348871543, guid: 2f58180bfb3e9ea4092a347ba9112564, type: 3}
+  spawnedBullets: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1121,5 +1168,6 @@ SceneRoots:
   - {fileID: 625363768}
   - {fileID: 608001134}
   - {fileID: 1293796823}
+  - {fileID: 496090888}
   - {fileID: 1846382610}
   - {fileID: 1305924353}

@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +9,8 @@ public class ShootingBulletScript : MonoBehaviour
 
     private Vector2 mousePos;
     private Vector2 direction;
+
+    public List<GameObject> spawnedBullets;
 
     void Update()
     {
@@ -18,7 +22,7 @@ public class ShootingBulletScript : MonoBehaviour
     {
         if (context.performed == true)
         {
-            Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            spawnedBullets.Add(Instantiate(bulletPrefab, transform.position, Quaternion.identity));
         }
     }
 

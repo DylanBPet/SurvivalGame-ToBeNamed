@@ -19,4 +19,7 @@ public class BulletScript : MonoBehaviour
     {
         transform.position += transform.up * moveSpeed * Time.deltaTime;
     }
+
+
+
 }

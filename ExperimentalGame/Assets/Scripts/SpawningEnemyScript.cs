@@ -13,6 +13,12 @@ public class SpawningEnemyScript : MonoBehaviour
     void Update()
     {
         playerPos = transform.position;
+
+        for (int i = 0; i < spawnedEnemies.Count; i++)
+        {
+           EnemyVariantOneScript enemyScript = spawnedEnemies[i].GetComponent<EnemyVariantOneScript>();
+            enemyScript.playerPos = playerPos;
+        }
     }
 
     public void SpawnEnemy()
