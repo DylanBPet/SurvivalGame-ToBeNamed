@@ -12,19 +12,37 @@ public class ShootingBulletScript : MonoBehaviour
 
     public List<GameObject> spawnedBullets;
 
+    private bool isShooting;
+    public float fireRate = 5;
+    private float nextTimeToFire;
+
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+        if (isShooting && Time.time >= nextTimeToFire)
+        {
+            fireRate = Time.time + 1f / fireRate;
+            shoot();
+        }
 
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed == true)
+        if (context.performed)
         {
-            spawnedBullets.Add(Instantiate(bulletPrefab, transform.position, Quaternion.identity));
+            isShooting = true;
+        }
+        else if (context.canceled)
+        {
+            isShooting = false;
         }
     }
 
+    private void shoot()
+    {
+        spawnedBullets.Add(Instantiate(bulletPrefab, transform.position, Quaternion.identity));
+    }
 
 }
