@@ -11,12 +11,13 @@ public class SpawningEnemyScript : MonoBehaviour
     public List<GameObject> spawnedEnemies;
 
     //the math to spawn more enemies the longer the game goes
-    public float initialSpawnDelay = 2f; //how long it takes initially in seconds to spawn an enemy
+    public float initialSpawnDelay = 1.5f; //how long it takes initially in seconds to spawn an enemy
     public float minSpawnDelay = 0.2f; //how long it will take to spawn enemy when max difficulty is reached
     public float timeToMaxDifficulty = 120f; //how long it takes to reach max difficulty
 
-    private float spawnTimer = 0f; //the time between spawning enemy
+    private float spawnTimer = 1.5f; //the time between spawning enemy
 
+    public int enemiesToSpawn = 4; //how many enemies to spawn at a time
     void Update()
     {
         //time counts up since the game started up to the max difficulty
@@ -34,8 +35,10 @@ public class SpawningEnemyScript : MonoBehaviour
         if (spawnTimer > currentSpawnDelay)
         {
             //spawn enemy
-            SpawnEnemy();
-            SpawnEnemy();
+            for (int i = 0; i < enemiesToSpawn; i++)
+            {
+                SpawnEnemy();
+            }
             //reset timer
             spawnTimer = 0;
         }
