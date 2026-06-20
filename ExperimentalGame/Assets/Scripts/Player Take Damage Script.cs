@@ -22,7 +22,7 @@ public class PlayerTakeDamageScript : MonoBehaviour
     {
         if (invincibleFrames == false)
         {
-            CheckForDamage();
+           CheckForDamage();
         }
     }
 
@@ -42,7 +42,7 @@ public class PlayerTakeDamageScript : MonoBehaviour
     public void PlayerTakeDamage(int damageAmount)
     {
         Debug.Log("player has been touched");
-        InvincibilityToggle();
+        invincibleFrames = true;
         playerHealthBar.value -= damageAmount;
         expandingKnockbackZoneCoroutine = StartCoroutine(ExpandKnockbackZone());
         Debug.Log("player has taken damage");
@@ -56,21 +56,18 @@ public class PlayerTakeDamageScript : MonoBehaviour
         while (playerKnockbackZone.localScale.x <= knockbackRange && playerKnockbackZone.localScale.y <= knockbackRange)
         {
             t += Time.deltaTime;
-            playerKnockbackZone.localScale = Vector2.one * t * 2;
+            playerKnockbackZone.localScale = Vector2.one * t * 4;
             yield return null;
         }
+        invincibleFrames = false;
         playerKnockbackZone.localScale = Vector2.zero;
     }
 
     IEnumerator InvincibilityToggle()
-    {
-        float t = 0;
-        while(t > 2)
-        {
-            invincibleFrames = true;
-            yield return null;
-        }
-
+    {   
+        invincibleFrames = true;
+        yield return new WaitForSeconds(1f);
+        invincibleFrames = false;
     }
 
 }

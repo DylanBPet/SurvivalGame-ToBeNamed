@@ -7,6 +7,8 @@ public class EnemyVariantOneScript : MonoBehaviour
     private Vector2 direction;
     public Vector2 playerPos;
 
+    
+
     void Update()
     {
         direction = playerPos - (Vector2)transform.position;

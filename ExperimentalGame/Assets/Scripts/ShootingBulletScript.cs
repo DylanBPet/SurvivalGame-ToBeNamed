@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,9 +5,6 @@ using UnityEngine.InputSystem;
 public class ShootingBulletScript : MonoBehaviour
 {
     public GameObject bulletPrefab;
-
-    private Vector2 mousePos;
-    private Vector2 direction;
 
     public List<GameObject> spawnedBullets;
 
@@ -18,7 +14,7 @@ public class ShootingBulletScript : MonoBehaviour
 
     void Update()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
         if (isShooting && Time.time >= nextTimeToFire)
         {

@@ -4,11 +4,13 @@ using UnityEngine;
 public class SpawningEnemyScript : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject enemyHealthBar;
 
     public Vector2 playerPos;
     private Vector2 enemySpawnPos;
 
     public List<GameObject> spawnedEnemiesOne;
+    public List<GameObject> enemyHealthBarList;
 
     //the math to spawn more enemies the longer the game goes
     public float initialSpawnDelay = 1.5f; //how long it takes initially in seconds to spawn an enemy
@@ -49,6 +51,9 @@ public class SpawningEnemyScript : MonoBehaviour
         {
            EnemyVariantOneScript enemyScript = spawnedEnemiesOne[i].GetComponent<EnemyVariantOneScript>();
             enemyScript.playerPos = playerPos;
+
+            //have health bar follow enemy
+            enemyHealthBarList[i].transform.position = spawnedEnemiesOne[i].transform.position;
         }
     }
 
@@ -56,11 +61,11 @@ public class SpawningEnemyScript : MonoBehaviour
     {
         GetRandomSpawn();
         spawnedEnemiesOne.Add(Instantiate(enemyPrefab, enemySpawnPos, Quaternion.identity));
-        
+        enemyHealthBarList.Add(Instantiate(enemyHealthBar, enemySpawnPos, Quaternion.identity));
     }
 
     private void GetRandomSpawn()
     {
-        enemySpawnPos = playerPos + (Random.insideUnitCircle.normalized * Random.Range(15, 30));
+        enemySpawnPos = playerPos + (Random.insideUnitCircle.normalized * Random.Range(10, 20));
     }
 }
