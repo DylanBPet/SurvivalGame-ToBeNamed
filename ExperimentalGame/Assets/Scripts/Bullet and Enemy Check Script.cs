@@ -10,19 +10,19 @@ public class BulletandEnemyCheckScript : MonoBehaviour
 
     void Update()
     {
-        if (bulletScript.spawnedBullets != null && spawningEnemyScript.spawnedEnemies != null)
+        if (bulletScript.spawnedBullets != null && spawningEnemyScript.spawnedEnemiesOne != null)
         {
             for (int i = 0; i < bulletScript.spawnedBullets.Count; i++)
             {
                 Transform bulletTransform = bulletScript.spawnedBullets[i].GetComponent<Transform>();
 
-                for (int j = 0; j < spawningEnemyScript.spawnedEnemies.Count; j++)
+                for (int j = 0; j < spawningEnemyScript.spawnedEnemiesOne.Count; j++)
                 {
-                    SpriteRenderer enemySr = spawningEnemyScript.spawnedEnemies[j].GetComponent<SpriteRenderer>();
+                    SpriteRenderer enemySr = spawningEnemyScript.spawnedEnemiesOne[j].GetComponent<SpriteRenderer>();
 
                     if (enemySr.bounds.Contains(bulletTransform.transform.position))
                     {
-                        EnemyTakeDamage(spawningEnemyScript.spawnedEnemies[j], bulletScript.spawnedBullets[i]);
+                        EnemyTakeDamage(spawningEnemyScript.spawnedEnemiesOne[j], bulletScript.spawnedBullets[i]);
                     }
 
                 }
@@ -42,7 +42,7 @@ public class BulletandEnemyCheckScript : MonoBehaviour
 
         if (enemyHealthBar.value <= 0)
         {
-            spawningEnemyScript.spawnedEnemies.Remove(enemy);
+            spawningEnemyScript.spawnedEnemiesOne.Remove(enemy);
             Destroy(enemy);
         }
         

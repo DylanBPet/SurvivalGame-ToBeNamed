@@ -8,7 +8,7 @@ public class SpawningEnemyScript : MonoBehaviour
     public Vector2 playerPos;
     private Vector2 enemySpawnPos;
 
-    public List<GameObject> spawnedEnemies;
+    public List<GameObject> spawnedEnemiesOne;
 
     //the math to spawn more enemies the longer the game goes
     public float initialSpawnDelay = 1.5f; //how long it takes initially in seconds to spawn an enemy
@@ -45,9 +45,9 @@ public class SpawningEnemyScript : MonoBehaviour
 
         playerPos = transform.position;
 
-        for (int i = 0; i < spawnedEnemies.Count; i++)
+        for (int i = 0; i < spawnedEnemiesOne.Count; i++)
         {
-           EnemyVariantOneScript enemyScript = spawnedEnemies[i].GetComponent<EnemyVariantOneScript>();
+           EnemyVariantOneScript enemyScript = spawnedEnemiesOne[i].GetComponent<EnemyVariantOneScript>();
             enemyScript.playerPos = playerPos;
         }
     }
@@ -55,7 +55,7 @@ public class SpawningEnemyScript : MonoBehaviour
     public void SpawnEnemy()
     {
         GetRandomSpawn();
-        spawnedEnemies.Add(Instantiate(enemyPrefab, enemySpawnPos, Quaternion.identity));
+        spawnedEnemiesOne.Add(Instantiate(enemyPrefab, enemySpawnPos, Quaternion.identity));
         
     }
 
