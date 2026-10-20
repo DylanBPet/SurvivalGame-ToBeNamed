@@ -4,25 +4,25 @@ using UnityEngine.UI;
 public class BulletandEnemyCheckScript : MonoBehaviour
 {
     public ShootingBulletScript bulletScript;
-    public SpawningEnemyScript spawningEnemyScript;
+    public TrackingEnemiesScript enemyListScript;
     public ControllingXPandLvlupScript xpScript;
 
     void Update()
     {
-        if (bulletScript.spawnedBullets != null && spawningEnemyScript.spawnedEnemiesOne != null)
+        if (bulletScript.spawnedBullets != null && enemyListScript.spawnedEnemiesVOne != null)
         {
             for (int i = 0; i < bulletScript.spawnedBullets.Count; i++)
             {
                 Transform bulletTransform = bulletScript.spawnedBullets[i].GetComponent<Transform>();
 
                 //check for enemy variant one
-                for (int j = 0; j < spawningEnemyScript.spawnedEnemiesOne.Count; j++)
+                for (int j = 0; j < enemyListScript.spawnedEnemiesVOne.Count; j++)
                 {
-                    SpriteRenderer enemySr = spawningEnemyScript.spawnedEnemiesOne[j].GetComponent<SpriteRenderer>();
+                    SpriteRenderer enemySr = enemyListScript.spawnedEnemiesVOne[j].GetComponent<SpriteRenderer>();
 
                     if (enemySr.bounds.Contains(bulletTransform.transform.position))
                     {
-                        EnemyTakeDamage(spawningEnemyScript.spawnedEnemiesOne[j], spawningEnemyScript.enemyHealthBarList[j],bulletScript.spawnedBullets[i]);
+                        EnemyTakeDamage(enemyListScript.spawnedEnemiesVOne[j],bulletScript.spawnedBullets[i]);
                     }
 
                 }
@@ -30,14 +30,14 @@ public class BulletandEnemyCheckScript : MonoBehaviour
         }
     }
 
-    public void EnemyTakeDamage(GameObject enemy, GameObject enemyHealthBar, GameObject bullet)
+    public void EnemyTakeDamage(GameObject enemy, GameObject bullet)
     {
         //delete and remove bullet from list
         bulletScript.spawnedBullets.Remove(bullet);
         Destroy(bullet);
 
         //make the enemy take damage, if the bar is 0 or below, delete enemy and remove from list
-        Slider healthBar = enemyHealthBar.GetComponentInChildren<Slider>();
+        Slider healthBar = enemy.GetComponentInChildren<Slider>();
         healthBar.value -= 20;
 
         if (healthBar.value <= 0)
@@ -45,10 +45,11 @@ public class BulletandEnemyCheckScript : MonoBehaviour
             Vector2 pipSpawnPoint = enemy.transform.position;
             xpScript.SpawnXpPip(pipSpawnPoint);
 
-            spawningEnemyScript.spawnedEnemiesOne.Remove(enemy);
+            enemyListScript.spawnedEnemiesVOne.Remove(enemy);
             Destroy(enemy);
-            spawningEnemyScript.enemyHealthBarList.Remove(enemyHealthBar);
-            Destroy(enemyHealthBar);
+
+            //enemyListScript.enemyHealthBarList.Remove(enemyHealthBar);
+            //Destroy(enemyHealthBar);
         }
         
     }

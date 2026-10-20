@@ -4,16 +4,28 @@ public class EnemyVariantOneScript : MonoBehaviour
 {
 
     public int moveSpeed;
-    public Vector2 playerPos;
+    public Transform playerPos;
 
-    float aggressionRange = 15;
+    public float aggressionRange = 2;
+
+    public TrackingEnemiesScript enemiesListScript;
+
+    void Start()
+    {
+        enemiesListScript.spawnedEnemiesVOne.Add(gameObject);
+    }
 
     void Update()
     {
-        float distanceToPlayer = Vector2.Distance(playerPos, transform.position);
+        Vector2 directionToPlayer = playerPos.transform.position - transform.position;
+        directionToPlayer = directionToPlayer.normalized;
+        Debug.DrawLine(transform.position, directionToPlayer);
+
+        float distanceToPlayer = Vector2.Distance(playerPos.transform.position, transform.position);
+
         if (distanceToPlayer < aggressionRange)
         {
-            Vector2 direction = playerPos - (Vector2)transform.position;
+            Vector2 direction = playerPos.transform.position - transform.position;
             transform.up = direction;
 
             transform.position += transform.up * moveSpeed * Time.deltaTime;

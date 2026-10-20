@@ -6,7 +6,7 @@ public class PlayerTakeDamageScript : MonoBehaviour
 {
     public Slider playerHealthBar;
 
-    public SpawningEnemyScript spawningEnemyScript;
+    public TrackingEnemiesScript enemyListScript;
 
     public GameObject player;
     public Transform playerKnockbackZone;
@@ -28,10 +28,10 @@ public class PlayerTakeDamageScript : MonoBehaviour
     public void CheckForDamage()
     {
         //enemy variant one check
-        for (int i = 0; i < spawningEnemyScript.spawnedEnemiesOne.Count; i++)
+        for (int i = 0; i < enemyListScript.spawnedEnemiesVOne.Count; i++)
         {
             Transform playerTransform = player.GetComponent<Transform>();
-            SpriteRenderer enemySR = spawningEnemyScript.spawnedEnemiesOne[i].GetComponent<SpriteRenderer>();
+            SpriteRenderer enemySR = enemyListScript.spawnedEnemiesVOne[i].GetComponent<SpriteRenderer>();
             if (enemySR.bounds.Contains(playerTransform.transform.position))
             {
                 PlayerTakeDamage(enemyVariantOneContactDamage);

@@ -48,7 +48,7 @@ public class SpawningEnemyScript : MonoBehaviour
         for (int i = 0; i < spawnedEnemiesOne.Count; i++)
         {
            EnemyVariantOneScript enemyScript = spawnedEnemiesOne[i].GetComponent<EnemyVariantOneScript>();
-            enemyScript.playerPos = playerPos.transform.position;
+            enemyScript.playerPos.transform.position = playerPos.transform.position;
 
             //have health bar follow enemy
             enemyHealthBarList[i].transform.position = spawnedEnemiesOne[i].transform.position;
