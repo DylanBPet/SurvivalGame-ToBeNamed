@@ -6,7 +6,7 @@ public class SpawningEnemyScript : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject enemyHealthBar;
 
-    public Vector2 playerPos;
+    public Transform playerPos;
     private Vector2 enemySpawnPos;
 
     public List<GameObject> spawnedEnemiesOne;
@@ -14,8 +14,8 @@ public class SpawningEnemyScript : MonoBehaviour
 
     //the math to spawn more enemies the longer the game goes
     public float initialSpawnDelay = 1.5f; //how long it takes initially in seconds to spawn an enemy
-    public float minSpawnDelay = 0.2f; //how long it will take to spawn enemy when max difficulty is reached
-    public float timeToMaxDifficulty = 120f; //how long it takes to reach max difficulty
+    public float minSpawnDelay = 4f; //how long it will take to spawn enemy when max difficulty is reached
+    public float timeToMaxDifficulty = 500f; //how long it takes to reach max difficulty
 
     private float spawnTimer = 1.5f; //the time between spawning enemy
 
@@ -45,12 +45,10 @@ public class SpawningEnemyScript : MonoBehaviour
             spawnTimer = 0;
         }
 
-        playerPos = transform.position;
-
         for (int i = 0; i < spawnedEnemiesOne.Count; i++)
         {
            EnemyVariantOneScript enemyScript = spawnedEnemiesOne[i].GetComponent<EnemyVariantOneScript>();
-            enemyScript.playerPos = playerPos;
+            enemyScript.playerPos = playerPos.transform.position;
 
             //have health bar follow enemy
             enemyHealthBarList[i].transform.position = spawnedEnemiesOne[i].transform.position;
@@ -66,6 +64,6 @@ public class SpawningEnemyScript : MonoBehaviour
 
     private void GetRandomSpawn()
     {
-        enemySpawnPos = playerPos + (Random.insideUnitCircle.normalized * Random.Range(10, 20));
+        enemySpawnPos = (Vector2)playerPos.transform.position + (Random.insideUnitCircle.normalized * Random.Range(10, 20));
     }
 }

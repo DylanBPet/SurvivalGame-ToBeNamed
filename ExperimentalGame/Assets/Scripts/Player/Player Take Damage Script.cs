@@ -16,14 +16,13 @@ public class PlayerTakeDamageScript : MonoBehaviour
 
     public Coroutine expandingKnockbackZoneCoroutine;
 
+    public float invincibilityDelay;
+
     public bool invincibleFrames;
     // Update is called once per frame
     void Update()
     {
-        if (invincibleFrames == false)
-        {
-           CheckForDamage();
-        }
+        CheckForDamage();
     }
 
     public void CheckForDamage()
@@ -38,12 +37,19 @@ public class PlayerTakeDamageScript : MonoBehaviour
                 PlayerTakeDamage(enemyVariantOneContactDamage);
             }
         }
+
+
+
     }
     public void PlayerTakeDamage(int damageAmount)
     {
         Debug.Log("player has been touched");
-        invincibleFrames = true;
-        playerHealthBar.value -= damageAmount;
+        if (invincibleFrames == false)
+        {
+            StartCoroutine(InvincibilityToggle());
+
+            playerHealthBar.value -= damageAmount;
+        }
         expandingKnockbackZoneCoroutine = StartCoroutine(ExpandKnockbackZone());
         Debug.Log("player has taken damage");
     }
@@ -59,14 +65,13 @@ public class PlayerTakeDamageScript : MonoBehaviour
             playerKnockbackZone.localScale = Vector2.one * t * 4;
             yield return null;
         }
-        invincibleFrames = false;
         playerKnockbackZone.localScale = Vector2.zero;
     }
 
     IEnumerator InvincibilityToggle()
     {   
         invincibleFrames = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(invincibilityDelay);
         invincibleFrames = false;
     }
 

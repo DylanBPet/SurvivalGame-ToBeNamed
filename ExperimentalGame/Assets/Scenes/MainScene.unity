@@ -54802,7 +54802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletandEnemyCheckScript
   bulletScript: {fileID: 1846382612}
-  spawningEnemyScript: {fileID: 1846382611}
+  spawningEnemyScript: {fileID: 741389596}
   xpScript: {fileID: 1342414106}
 --- !u!114 &496090890
 MonoBehaviour:
@@ -54817,11 +54817,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerTakeDamageScript
   playerHealthBar: {fileID: 573042703}
-  spawningEnemyScript: {fileID: 1846382611}
+  spawningEnemyScript: {fileID: 741389596}
   player: {fileID: 1846382606}
   playerKnockbackZone: {fileID: 1216484105}
   enemyVariantOneContactDamage: 10
   knockbackRange: 4
+  invincibilityDelay: 2
   invincibleFrames: 0
 --- !u!1 &573042701
 GameObject:
@@ -55193,6 +55194,59 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &741389595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 741389597}
+  - component: {fileID: 741389596}
+  m_Layer: 0
+  m_Name: Spawning Script
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &741389596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741389595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f448dcb1acb343844bab681fddec52ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawningEnemyScript
+  enemyPrefab: {fileID: 6522999436730333976, guid: 6d86801f613513448a365abb8a972a25, type: 3}
+  enemyHealthBar: {fileID: 2398282580166749373, guid: da2edc6aa6e94ad438c385fa24c52f7c, type: 3}
+  playerPos: {fileID: 1846382610}
+  spawnedEnemiesOne: []
+  enemyHealthBarList: []
+  initialSpawnDelay: 1.5
+  minSpawnDelay: 4
+  timeToMaxDifficulty: 500
+  enemiesToSpawn: 1
+--- !u!4 &741389597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741389595}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.37681, y: -0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55957,7 +56011,6 @@ GameObject:
   - component: {fileID: 1846382609}
   - component: {fileID: 1846382608}
   - component: {fileID: 1846382607}
-  - component: {fileID: 1846382611}
   - component: {fileID: 1846382612}
   m_Layer: 0
   m_Name: Player
@@ -56185,27 +56238,6 @@ Transform:
   - {fileID: 1216484105}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1846382611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1846382606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f448dcb1acb343844bab681fddec52ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawningEnemyScript
-  enemyPrefab: {fileID: 6522999436730333976, guid: 6d86801f613513448a365abb8a972a25, type: 3}
-  enemyHealthBar: {fileID: 2398282580166749373, guid: da2edc6aa6e94ad438c385fa24c52f7c, type: 3}
-  playerPos: {x: 0, y: 0}
-  spawnedEnemiesOne: []
-  enemyHealthBarList: []
-  initialSpawnDelay: 3
-  minSpawnDelay: 0.5
-  timeToMaxDifficulty: 120
-  enemiesToSpawn: 4
 --- !u!114 &1846382612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56305,6 +56337,7 @@ SceneRoots:
   - {fileID: 1293796823}
   - {fileID: 496090888}
   - {fileID: 1342414107}
+  - {fileID: 741389597}
   - {fileID: 1846382610}
   - {fileID: 1305924353}
   - {fileID: 112159498}

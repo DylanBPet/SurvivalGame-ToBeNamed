@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5185601246236947923}
   - component: {fileID: 2869589546579456453}
   m_Layer: 0
-  m_Name: Enemy Variant One
+  m_Name: Variant One
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358b67fc3751ff3439305c7de962d204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyVariantOneScript
-  moveSpeed: 3
+  moveSpeed: 2
   playerPos: {x: 0, y: 0}
 --- !u!50 &5185601246236947923
 Rigidbody2D:
